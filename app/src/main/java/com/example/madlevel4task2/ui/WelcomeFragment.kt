@@ -1,11 +1,8 @@
 package com.example.madlevel4task2.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.example.madlevel4task2.R
 import com.example.madlevel4task2.model.GameLog
 import com.example.madlevel4task2.repository.GameLogRepository
@@ -14,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.random.Random
 
@@ -50,6 +48,8 @@ class WelcomeFragment : Fragment() {
 
         hideViews()
 
+        updateState()
+
         ibRock.setOnClickListener {
             rockClicked();
         }
@@ -71,6 +71,15 @@ class WelcomeFragment : Fragment() {
         tvComputer.visibility = View.INVISIBLE
         tvVS.visibility = View.INVISIBLE
         tvGameResult.visibility = View.INVISIBLE
+    }
+
+    private fun updateState() {
+        mainScope.launch {
+            tvStats.text =  withContext(Dispatchers.IO) {
+                "Win: " + gameLogRepository.getWin() + " Draw: " +
+                        gameLogRepository.getDraw() + " Lose: " + gameLogRepository.getLose()
+            }
+        }
     }
 
     private fun rockClicked() {
@@ -123,18 +132,15 @@ class WelcomeFragment : Fragment() {
         tvVS.visibility = View.VISIBLE
         tvGameResult.text = getResult()
         tvGameResult.visibility = View.VISIBLE
-        mainScope.launch {
-            tvStats.text =  withContext(Dispatchers.IO) {
-                "Win: " + gameLogRepository.getWin() + " Draw: " +
-                        gameLogRepository.getDraw() + " Lose: " + gameLogRepository.getLose()
-            }
-        }
+        updateState()
     }
 
     private fun addGameLog() {
+        val cal = Calendar.getInstance()
+        val sdf = SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy" )
         mainScope.launch {
             val game = GameLog(
-                gameDate = Calendar.getInstance().toString(),
+                gameDate = sdf.format(cal.time),
                 moveComputer = computerMove,
                 movePlayer = playerMove,
                 result = getResult()

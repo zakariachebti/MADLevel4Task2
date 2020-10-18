@@ -1,10 +1,8 @@
 package com.example.madlevel4task2.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_game_history.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -43,7 +42,6 @@ class GameHistoryFragment : Fragment() {
 
         getGameLogsFromDatabase()
 
-
     }
 
     private fun initViews() {
@@ -55,7 +53,9 @@ class GameHistoryFragment : Fragment() {
 
     private fun getGameLogsFromDatabase() {
         mainScope.launch {
-            val games = gameLogRepository.getAllGames()
+            val games = withContext(Dispatchers.IO) {
+                gameLogRepository.getAllGames()
+            }
             this@GameHistoryFragment.games.clear()
             this@GameHistoryFragment.games.addAll(games)
             gameLogAdapter.notifyDataSetChanged()

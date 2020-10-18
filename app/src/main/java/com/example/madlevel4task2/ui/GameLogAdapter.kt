@@ -3,6 +3,7 @@ package com.example.madlevel4task2.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel4task2.R
 import com.example.madlevel4task2.model.GameLog
@@ -16,6 +17,16 @@ class GameLogAdapter(private val games: List<GameLog>) : RecyclerView.Adapter<Ga
         fun databind(game: GameLog) {
             itemView.rvResult.text = game.result
             itemView.tvDate.text = game.gameDate
+            setImage(itemView.ivPlayer, game.movePlayer)
+            setImage(itemView.ivComputer, game.moveComputer)
+        }
+    }
+
+    private fun setImage(item: ImageView, i: String) {
+        when (i) {
+            "rock" -> item.setImageResource(R.drawable.rock)
+            "paper" -> item.setImageResource(R.drawable.paper)
+            "scissors" -> item.setImageResource(R.drawable.scissors)
         }
     }
 

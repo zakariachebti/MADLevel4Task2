@@ -15,4 +15,6 @@
     <string name="v_s">V.S.</string>
     <string name="computer">Computer</string>
     <string name="you">You</string>
+    <string name="delete">Delete</string>
+    <string name="history">History</string>
 </resources>
