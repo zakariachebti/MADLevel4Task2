@@ -15,7 +15,7 @@ class GameLogAdapter(private val games: List<GameLog>) : RecyclerView.Adapter<Ga
 
         fun databind(game: GameLog) {
             itemView.rvResult.text = game.result
-            itemView.tvDate.text = game.gameDate.toString()
+            itemView.tvDate.text = game.gameDate
         }
     }
 

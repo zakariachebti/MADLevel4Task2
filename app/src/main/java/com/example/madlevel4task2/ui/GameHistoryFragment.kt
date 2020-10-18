@@ -14,18 +14,19 @@ import com.example.madlevel4task2.repository.GameLogRepository
 import kotlinx.android.synthetic.main.fragment_game_history.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class GameHistoryFragment : Fragment() {
-/*
+
     private lateinit var gameLogRepository: GameLogRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
 
     private val games = arrayListOf<GameLog>()
     private val gameLogAdapter = GameLogAdapter(games)
-*/
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -36,15 +37,15 @@ class GameHistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        gameLogRepository = GameLogRepository(requireContext())
 
-        //initViews()
+        initViews()
 
-        //gameLogRepository = GameLogRepository(requireContext())
-        //getGameLogsFromDatabase()
+        getGameLogsFromDatabase()
 
 
     }
-/*
+
     private fun initViews() {
         rvGameHistory.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         rvGameHistory.adapter = gameLogAdapter
@@ -53,10 +54,12 @@ class GameHistoryFragment : Fragment() {
     }
 
     private fun getGameLogsFromDatabase() {
-        val games = gameLogRepository.getAllGames()
-        this@GameHistoryFragment.games.clear()
-        this@GameHistoryFragment.games.addAll(games)
-        gameLogAdapter.notifyDataSetChanged()
+        mainScope.launch {
+            val games = gameLogRepository.getAllGames()
+            this@GameHistoryFragment.games.clear()
+            this@GameHistoryFragment.games.addAll(games)
+            gameLogAdapter.notifyDataSetChanged()
+        }
     }
-*/
+
 }

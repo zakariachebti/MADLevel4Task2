@@ -5,7 +5,7 @@ import com.example.madlevel4task2.dao.GameLogDao
 import com.example.madlevel4task2.database.GameLogRoomDatabase
 import com.example.madlevel4task2.model.GameLog
 
-public class GameLogRepository(context: Context) {
+class GameLogRepository(context: Context) {
 
     private lateinit var gameLogDao: GameLogDao
 
@@ -24,6 +24,18 @@ public class GameLogRepository(context: Context) {
 
     fun deleteAllGames() {
         gameLogDao.deleteAllGames()
+    }
+
+    fun getDraw(): String {
+        return gameLogDao.getDrawCount()
+    }
+
+    fun getWin(): String {
+        return gameLogDao.getWinCount()
+    }
+
+    fun getLose(): String {
+        return gameLogDao.getLoseCount()
     }
 
 }

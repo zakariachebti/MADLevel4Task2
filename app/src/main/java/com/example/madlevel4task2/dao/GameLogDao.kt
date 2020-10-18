@@ -18,4 +18,13 @@ interface GameLogDao {
     @Query("DELETE FROM gameLogTable")
     fun deleteAllGames()
 
+    @Query("SELECT COUNT(*) FROM gameLogTable WHERE result = 'Draw'")
+    fun getDrawCount(): String
+
+    @Query("SELECT COUNT(*) FROM gameLogTable WHERE result = 'Computer wins!'")
+    fun getLoseCount(): String
+
+    @Query("SELECT COUNT(*) FROM gameLogTable WHERE result = 'You win!'")
+    fun getWinCount(): String
+
 }
