@@ -56,7 +56,7 @@
         app:srcCompat="@color/colorPrimary" />
 
     <TextView
-        android:id="@+id/tvResult"
+        android:id="@+id/tvGameResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -79,26 +79,24 @@
         app:layout_constraintTop_toBottomOf="@+id/tvStats" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/ivGamePlayer"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/ivGameComputer"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginEnd="16dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView6"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/textView7"
@@ -106,9 +104,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/computer"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintEnd_toEndOf="@+id/ivGameComputer"
+        app:layout_constraintStart_toStartOf="@+id/ivGameComputer"
+        app:layout_constraintTop_toBottomOf="@+id/ivGameComputer" />
 
     <TextView
         android:id="@+id/textView8"
@@ -116,17 +114,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/you"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintEnd_toEndOf="@+id/ivGamePlayer"
+        app:layout_constraintStart_toStartOf="@+id/ivGamePlayer"
+        app:layout_constraintTop_toBottomOf="@+id/ivGamePlayer" />
 
     <ImageView
         android:id="@+id/ivRock"
         android:layout_width="100dp"
         android:layout_height="70dp"
-        android:layout_margin="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivPaper"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         tools:src="@drawable/rock" />
 
@@ -134,10 +134,11 @@
         android:id="@+id/ivPaper"
         android:layout_width="100dp"
         android:layout_height="70dp"
-        android:layout_margin="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ivscissor"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivRock"
         tools:src="@drawable/paper" />
 
@@ -145,10 +146,12 @@
         android:id="@+id/ivscissor"
         android:layout_width="100dp"
         android:layout_height="70dp"
-        android:layout_margin="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivPaper"
         tools:src="@drawable/scissors" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
