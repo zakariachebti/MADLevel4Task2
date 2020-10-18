@@ -15,7 +15,7 @@ interface GameLogDao {
     @Insert
     fun insertGame(reminder: GameLog)
 
-    @Delete
+    @Query("DELETE FROM gameLogTable")
     fun deleteAllGames()
 
 }

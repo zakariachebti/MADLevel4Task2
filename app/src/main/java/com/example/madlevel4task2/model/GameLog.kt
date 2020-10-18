@@ -3,13 +3,12 @@ package com.example.madlevel4task2.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
 @Entity(tableName = "gameLogTable")
 data class GameLog(
 
     @ColumnInfo(name = "date")
-    var gameDate: Date,
+    var gameDate: String,
 
     @ColumnInfo(name = "move_computer")
     var moveComputer: String,

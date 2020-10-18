@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.GameHistoryFragment">
+    tools:context=".ui.WelcomeFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -49,11 +49,11 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="10dp"
+        android:background="@color/colorPrimary"
         android:src="@android:drawable/screen_background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:srcCompat="@color/colorPrimary" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/tvGameResult"
@@ -128,7 +128,7 @@
         app:layout_constraintEnd_toStartOf="@+id/ivPaper"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:src="@drawable/rock" />
+        app:srcCompat="@drawable/rock" />
 
     <ImageView
         android:id="@+id/ivPaper"
@@ -140,7 +140,7 @@
         app:layout_constraintEnd_toStartOf="@+id/ivscissor"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivRock"
-        tools:src="@drawable/paper" />
+        app:srcCompat="@drawable/paper" />
 
     <ImageView
         android:id="@+id/ivscissor"
@@ -152,6 +152,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivPaper"
-        tools:src="@drawable/scissors" />
+        app:srcCompat="@drawable/scissors" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

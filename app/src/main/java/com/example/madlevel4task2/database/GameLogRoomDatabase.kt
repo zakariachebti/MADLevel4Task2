@@ -16,22 +16,21 @@ abstract class GameLogRoomDatabase : RoomDatabase() {
         private const val DATABASE_NAME = "REMINDER_DATABASE"
 
         @Volatile
-        private var reminderRoomDatabaseInstance: GameLogRoomDatabase? = null
+        private var gameLogRoomDatabase: GameLogRoomDatabase? = null
 
         fun getDatabase(context: Context): GameLogRoomDatabase? {
-            if (reminderRoomDatabaseInstance == null) {
+            if (gameLogRoomDatabase == null) {
                 synchronized(GameLogRoomDatabase::class.java) {
-                    if (reminderRoomDatabaseInstance == null) {
-                        reminderRoomDatabaseInstance = Room.databaseBuilder(
+                    if (gameLogRoomDatabase == null) {
+                        gameLogRoomDatabase = Room.databaseBuilder(
                             context.applicationContext,
                             GameLogRoomDatabase::class.java, DATABASE_NAME
                         )
-                            .allowMainThreadQueries()
                             .build()
                     }
                 }
             }
-            return reminderRoomDatabaseInstance
+            return gameLogRoomDatabase
         }
     }
 
