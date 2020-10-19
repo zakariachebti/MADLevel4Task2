@@ -136,6 +136,26 @@ class WelcomeFragment : Fragment() {
         tvGameResult.visibility = View.VISIBLE
     }
 
+    private fun getResult(): String {
+        if (computerMove == playerMove) return DRAW
+        when (computerMove) {
+            ROCK -> {
+                return if (playerMove == PAPER) PLAYER_WINS
+                else COMPUTER_WINS
+            }
+            PAPER -> {
+                return if (playerMove == SCISSORS) PLAYER_WINS
+                else COMPUTER_WINS
+            }
+            SCISSORS -> {
+                return if (playerMove == ROCK) PLAYER_WINS
+                else COMPUTER_WINS
+
+            }
+            else -> return "hoi"
+        }
+    }
+
     private fun addGameLog() {
         val cal = Calendar.getInstance()
         val sdf = SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy" )
@@ -155,27 +175,6 @@ class WelcomeFragment : Fragment() {
                 "Win: " + gameLogRepository.getWin() + " Draw: " +
                         gameLogRepository.getDraw() + " Lose: " + gameLogRepository.getLose()
             }
-        }
-        //updateState()
-    }
-
-    private fun getResult(): String {
-        if (computerMove == playerMove) return DRAW
-        when (computerMove) {
-            ROCK -> {
-                return if (playerMove == PAPER) PLAYER_WINS
-                else COMPUTER_WINS
-            }
-            PAPER -> {
-                return if (playerMove == SCISSORS) PLAYER_WINS
-                else COMPUTER_WINS
-            }
-            SCISSORS -> {
-                return if (playerMove == ROCK) PLAYER_WINS
-                else COMPUTER_WINS
-
-            }
-            else -> return "hoi"
         }
     }
 
