@@ -39,6 +39,7 @@ class WelcomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_welcome, container, false)
     }
 
@@ -62,6 +63,11 @@ class WelcomeFragment : Fragment() {
             scissorClicked();
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun hideViews() {
@@ -121,10 +127,6 @@ class WelcomeFragment : Fragment() {
                 computerMove = SCISSORS
             }
         }
-        showViews()
-    }
-
-    private fun showViews() {
         ivGamePlayer.visibility = View.VISIBLE
         tvPlayer.visibility = View.VISIBLE
         ivGameComputer.visibility = View.VISIBLE
@@ -132,7 +134,6 @@ class WelcomeFragment : Fragment() {
         tvVS.visibility = View.VISIBLE
         tvGameResult.text = getResult()
         tvGameResult.visibility = View.VISIBLE
-        updateState()
     }
 
     private fun addGameLog() {
@@ -149,7 +150,13 @@ class WelcomeFragment : Fragment() {
             withContext(Dispatchers.IO) {
                 gameLogRepository.insertGame(game)
             }
+
+            tvStats.text =  withContext(Dispatchers.IO) {
+                "Win: " + gameLogRepository.getWin() + " Draw: " +
+                        gameLogRepository.getDraw() + " Lose: " + gameLogRepository.getLose()
+            }
         }
+        //updateState()
     }
 
     private fun getResult(): String {

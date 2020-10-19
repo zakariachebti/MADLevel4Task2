@@ -31,6 +31,7 @@ class GameHistoryFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_game_history, container, false)
     }
 
@@ -42,6 +43,20 @@ class GameHistoryFragment : Fragment() {
 
         getGameLogsFromDatabase()
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_history, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.delete_history -> {
+                deleteGameLogs()
+                super.onOptionsItemSelected(item)
+            } else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun initViews() {
@@ -58,7 +73,17 @@ class GameHistoryFragment : Fragment() {
             }
             this@GameHistoryFragment.games.clear()
             this@GameHistoryFragment.games.addAll(games)
-            gameLogAdapter.notifyDataSetChanged()
+            this@GameHistoryFragment.gameLogAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun deleteGameLogs() {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                gameLogRepository.deleteAllGames()
+            }
+            this@GameHistoryFragment.games.clear()
+            this@GameHistoryFragment.gameLogAdapter.notifyDataSetChanged()
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.madlevel4task2.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,12 +20,28 @@ class MainActivity : AppCompatActivity() {
 
         navController = findNavController(R.id.nav_host_fragment)
 
+        toolbar.setNavigationOnClickListener {
+            back()
+        }
+
+        backToggler()
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    private fun backToggler() {
+        navController.addOnDestinationChangedListener { _,       destination, _ ->
+            if (destination.id in arrayOf(R.id.gameHistoryFragment)) {
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                supportActionBar?.setDisplayShowHomeEnabled(true)
+            } else {
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                supportActionBar?.setDisplayShowHomeEnabled(false)
+            }
+        }
+    }
+
+    private fun back() {
+        navController.navigate( R.id.action_gameHistoryFragment_to_welcomeFragment)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -34,8 +51,6 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_history -> {
                 navController.navigate( R.id.action_welcomeFragment_to_gameHistoryFragment)
-                supportActionBar?.setDisplayHomeAsUpEnabled(true)
-                supportActionBar?.setDisplayShowHomeEnabled(true)
                 return true
             } else -> super.onOptionsItemSelected(item)
         }
