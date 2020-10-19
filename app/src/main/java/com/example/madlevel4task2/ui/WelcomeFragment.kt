@@ -52,15 +52,15 @@ class WelcomeFragment : Fragment() {
         updateState()
 
         ibRock.setOnClickListener {
-            rockClicked();
+            playerMoveSelected(ROCK)
         }
 
         ibPaper.setOnClickListener {
-            paperClicked();
+            playerMoveSelected(PAPER)
         }
 
         ibScissor.setOnClickListener {
-            scissorClicked();
+            playerMoveSelected(SCISSORS)
         }
 
     }
@@ -88,23 +88,13 @@ class WelcomeFragment : Fragment() {
         }
     }
 
-    private fun rockClicked() {
-        playerMove = ROCK
-        ivGamePlayer.setImageResource(R.drawable.rock)
-        refreshGame()
-        addGameLog()
-    }
-
-    private fun paperClicked() {
-        playerMove = PAPER
-        ivGamePlayer.setImageResource(R.drawable.paper)
-        refreshGame()
-        addGameLog()
-    }
-
-    private fun scissorClicked() {
-        playerMove = SCISSORS
-        ivGamePlayer.setImageResource(R.drawable.scissors)
+    private fun playerMoveSelected(move: String) {
+        playerMove = move
+        when (move) {
+            ROCK -> ivGamePlayer.setImageResource(R.drawable.rock)
+            PAPER -> ivGamePlayer.setImageResource(R.drawable.paper)
+            SCISSORS -> ivGamePlayer.setImageResource(R.drawable.scissors)
+        }
         refreshGame()
         addGameLog()
     }
